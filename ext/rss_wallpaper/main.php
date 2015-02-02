@@ -4,7 +4,7 @@
  * Author: Thasan
  * Link:
  * License: GPLv2
- * Description: Self explanatory
+ * Description: Self explanatory. Download theme http://example.com/download_theme
  */
 
 class RSS_Wallpaper extends Extension {
@@ -38,6 +38,21 @@ class RSS_Wallpaper extends Extension {
 				$images[] = Image::by_random($search_terms);
 			}
 			$this->do_rss($images, $search_terms, $page_number);
+		}
+		if($event->page_matches("download_theme")) {
+			global $page;
+			global $config;
+	                $title = $config->get_string('title');
+	                $base_href = make_http(get_base_href());
+
+			$page->set_mode("data");
+			$page->set_type("application/octet-stream");
+			header('Content-Disposition: attachment; filename="' . $title . '.theme"');
+			header("Content-Transfer-Encoding: binary");
+
+			$str=implode("", file(getcwd() . "/ext/rss_wallpaper/themefile.txt"));
+			$str=str_replace("<url>", $base_href . "/rss_wallpaper/", $str);
+			echo $str;
 		}
 	}
 
