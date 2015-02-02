@@ -116,7 +116,7 @@ class RSS_Wallpaper extends Extension {
   <channel>
     <title>$title</title>
     <link>$base_href</link>
-    <description>The latest uploads to the image board</description>
+    <description>Random images for theme</description>
     <generator>Shimmie-$version</generator>
     <copyright></copyright>
     $data
