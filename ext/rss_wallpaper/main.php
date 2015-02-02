@@ -28,11 +28,15 @@ class RSS_Wallpaper extends Extension {
 			$search_terms = $event->get_search_terms();
 			$search_terms[] = "size>=1024x768";
 			$search_terms[] = "ratio>=4:3";
+//			$search_terms[] = "order:random_" + rand(0, 9999);
 //			$search_terms[] = "ratio<=16:9";
 			$page_number = $event->get_page_number();
-			$page_size = $event->get_page_size();
-			$page_size = 200;
-			$images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms);
+//			$page_size = $event->get_page_size();
+			$page_size = 50;
+//			$images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms);
+			for($i=0 ; $i < $page_size ; $i++) {
+				$images[] = Image::by_random($search_terms);
+			}
 			$this->do_rss($images, $search_terms, $page_number);
 		}
 	}
