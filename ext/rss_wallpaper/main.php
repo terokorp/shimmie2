@@ -23,6 +23,13 @@ class RSS_Wallpaper extends Extension {
 		}
 	}
 
+	// Add a block to the Board Config / Setup
+	public function onSetupBuilding(SetupBuildingEvent $event) {
+		$sb = new SetupBlock("RSS Wallpaper");
+		$sb->add_text_option ("rsswallpaperSearch", "Rss wallpaper search");
+		$event->panel->add_block($sb);
+	}
+	
 	public function onPageRequest(PageRequestEvent $event) {
 		if($event->page_matches("rss_wallpaper")) {
 			$search_terms = $event->get_search_terms();
@@ -53,7 +60,7 @@ class RSS_Wallpaper extends Extension {
 			$str=implode("", file(getcwd() . "/ext/rss_wallpaper/themefile.txt"));
 			$str=str_replace("<url>", $base_href . "/rss_wallpaper/", $str);
 			$str=str_replace("<themename>", $title, $str);
-			
+			$str=str_replace("<search>", urlencode($config->get_string('rsswallpaperSearch')), $str);
 			echo $str;
 		}
 	}

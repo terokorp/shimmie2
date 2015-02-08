@@ -4,7 +4,7 @@ DisplayName=<themename>
 [Slideshow]
 Interval=1800000
 Shuffle=1
-RssFeed=<url>rating%3Ds%20wallpaper/1
+RssFeed=<url><search>/1
 
 [Control Panel\Desktop]
 TileWallpaper=0
