@@ -1,5 +1,5 @@
 [[Theme]
-DisplayName=Taiga
+DisplayName=<themename>
 
 [Slideshow]
 Interval=1800000

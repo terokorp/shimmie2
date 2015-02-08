@@ -52,6 +52,8 @@ class RSS_Wallpaper extends Extension {
 
 			$str=implode("", file(getcwd() . "/ext/rss_wallpaper/themefile.txt"));
 			$str=str_replace("<url>", $base_href . "/rss_wallpaper/", $str);
+			$str=str_replace("<themename>", $title, $str);
+			
 			echo $str;
 		}
 	}
