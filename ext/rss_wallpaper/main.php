@@ -23,13 +23,22 @@ class RSS_Wallpaper extends Extension {
 		}
 	}
 
+	public function onInitExt(InitExtEvent $event) {
+		global $config, $database;
+		if ($config->get_int("ext_rsswallpaper_version") < 1){
+			$config->set_string("rsswallpaperSearch", "rating:s wallpaper");
+			$config->set_int("ext_rsswallpaper_version", 1);
+			log_info("rsswallpaper", "extension installed");
+		}
+	}
+
 	// Add a block to the Board Config / Setup
 	public function onSetupBuilding(SetupBuildingEvent $event) {
 		$sb = new SetupBlock("RSS Wallpaper");
-		$sb->add_text_option ("rsswallpaperSearch", "Rss wallpaper search");
+		$sb->add_text_option ("rsswallpaperSearch", "RSS wallpaper search: ");
 		$event->panel->add_block($sb);
 	}
-	
+
 	public function onPageRequest(PageRequestEvent $event) {
 		if($event->page_matches("rss_wallpaper")) {
 			$search_terms = $event->get_search_terms();
